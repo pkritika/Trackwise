@@ -4,7 +4,7 @@ TrackWise is a **production-grade** expense tracking application that extracts a
 
 ## Features
 
-### 🎯 Production-Grade PDF Parser
+###  Production-Grade PDF Parser
 - **Intelligent Page Scoring**: Automatically identifies pages containing transactions
 - **Multi-Layer Extraction**:
   - Layer 1: Table extraction with heuristic column detection
@@ -14,13 +14,13 @@ TrackWise is a **production-grade** expense tracking application that extracts a
 - **Smart Validation**: Automatic deduplication and data cleaning
 - **Robust Error Handling**: Clear error messages and troubleshooting tips
 
-### 📊 Analytics Dashboard
+### Analytics Dashboard
 - View all transactions in a clean, formatted table
 - Transaction statistics (total spent, received, net change)
 - Top expenses and income breakdown
 - Export to CSV for further analysis
 
-### 🤖 AI-Powered Categorization
+### AI-Powered Categorization
 - **Automatic categorization** using Claude (Anthropic's AI)
 - **10 smart categories**: Food & Dining, Transport, Shopping, Entertainment, Utilities, Health, Rent/Housing, Income, Subscriptions, Other
 - **Batch processing**: Efficiently processes 50 transactions per API call
@@ -30,7 +30,7 @@ TrackWise is a **production-grade** expense tracking application that extracts a
 - **Category filtering**: Filter transactions by one or more categories
 - **Export categorized data**: Download CSV with category column
 
-### 🔮 Coming Soon
+### Coming Soon
 - Spending trends over time
 - Budget tracking and alerts
 - Multi-statement comparison
@@ -83,7 +83,7 @@ To use the AI-powered categorization feature:
 2. **Categorize Your Transactions**:
    - Upload and parse your bank statement PDF
    - Enter your API key in the "Anthropic API Key" field
-   - Click "🎯 Categorize Transactions"
+   - Click "Categorize Transactions"
    - Wait for Claude to process your transactions (batches of 50)
    - View categorized results with interactive visualizations
 
