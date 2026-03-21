@@ -1,0 +1,9 @@
+flask
+pdfplumber
+pandas
+anthropic
+
+# Optional OCR dependencies (for Layer 3 - scanned PDFs)
+# Uncomment these lines if you need OCR support:
+# pdf2image
+# pytesseract
