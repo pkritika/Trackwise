@@ -5,11 +5,11 @@ import pandas as pd
 
 # these are the patterns used throughout
 DATE_RE = re.compile(
-    r'\b(\d{1,2}[/-]\d{1,2}[/-]\d{2,4}|\d{4}[/-]\d{1,2}[/-]\d{1,2}|'
+    r'\b(\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?|\d{4}[/-]\d{1,2}[/-]\d{1,2}|'
     r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\s+\d{1,2}(?:,?\s*\d{4})?)\b',
     re.IGNORECASE
 )
-AMOUNT_RE = re.compile(r'\(?\$?\s*-?\d{1,3}(?:,\d{3})*\.?\d{0,2}\)?')
+AMOUNT_RE = re.compile(r'-?\(?\$?\s*-?\d{1,3}(?:,\d{3})*\.?\d{0,2}\)?')
 
 
 def extract_transactions(pdf_path: str) -> pd.DataFrame:
@@ -57,7 +57,7 @@ def is_transaction_page(page) -> bool:
     if any(w in text_lower for w in legal_words):
         return False
 
-    return dates >= 1 and amounts >= 1
+    return dates >= 3 and amounts >= 3
 
 
 def extract_from_table(page) -> list:  # try to pull transactions out of a proper pdf table.
@@ -82,19 +82,27 @@ def extract_from_table(page) -> list:  # try to pull transactions out of a prope
 
             if _looks_like_date(date) and _looks_like_amount(amount):
                 transactions.append({"date": date, "description": desc, "amount": amount})
+
+    print(f"Table extraction found {len(transactions)} transactions")
     return transactions
 
 
 def _looks_like_date(text: str) -> bool:    #helper
+    # Also accept dates without year like "02/07" which are common in credit card statements
     return bool(re.match(
-        r'^(\d{1,2}[/-]\d{1,2}[/-]\d{2,4}|\d{4}[/-]\d{1,2}[/-]\d{1,2}|'
+        r'^(\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?|\d{4}[/-]\d{1,2}[/-]\d{1,2}|'
         r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\s+\d{1,2})',
         text, re.IGNORECASE
     ))
 
 
 def _looks_like_amount(text: str) -> bool:
-    return bool(re.match(r'^\(?\$?\s*-?\d{1,3}(?:,\d{3})*\.?\d{0,2}\)?$', text.strip()))
+    # Handle amounts with or without dollar sign, with negative sign or parentheses
+    text = text.strip()
+    if not text:
+        return False
+    # Accept formats: 123.45, -123.45, (123.45), $123.45, -$123.45, 1,234.56, etc.
+    return bool(re.match(r'^-?\(?\$?\s*-?\d{1,3}(?:,\d{3})*\.?\d{0,2}\)?$', text))
 
 def extract_from_text(page) -> list:
     """fallback: parse raw text lines with regex when there's no clean table."""
@@ -136,6 +144,15 @@ def clean_transactions(raw: list) -> pd.DataFrame:
     # drop obvious header rows that snuck through
     header_words = {"date", "description", "amount", "balance", "transaction"}
     df = df[~df["description"].str.lower().isin(header_words)]
+
+    # filter out page numbers and document metadata (common patterns in headers/footers)
+    df = df[~df["description"].str.contains(r"Page \d+ of \d+|MA MA|06615|^\d{5,}$", regex=True, case=False, na=False)]
+
+    # filter out transactions with amounts that look like document IDs (over $10,000)
+    df = df[df["amount"].abs() < 10000]
+
+    # filter out rows where description is just a date range or mostly numbers/dashes
+    df = df[~df["description"].str.match(r'^[\d\s/\-]+$', na=False)]
 
     df = df.drop_duplicates(subset=["date", "description", "amount"])
     return df[["date", "description", "amount"]].reset_index(drop=True)
