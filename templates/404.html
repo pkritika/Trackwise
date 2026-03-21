@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>404 — TrackWise</title>
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<style>
+.error-page{
+  min-height:100vh;
+  background:var(--ink);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:2rem;
+  text-align:center;
+}
+.error-content{
+  max-width:500px;
+}
+.error-code{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:8rem;
+  font-weight:900;
+  color:var(--lime);
+  line-height:1;
+  margin-bottom:1rem;
+  letter-spacing:-.05em;
+}
+.error-title{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:2rem;
+  font-weight:800;
+  color:var(--cream);
+  margin-bottom:1rem;
+}
+.error-desc{
+  font-size:.95rem;
+  color:rgba(250,247,240,.4);
+  margin-bottom:2rem;
+  line-height:1.65;
+}
+</style>
+</head>
+<body>
+<div class="error-page">
+  <div class="error-content">
+    <div class="error-code">404</div>
+    <h1 class="error-title">Page not found</h1>
+    <p class="error-desc">The page you're looking for doesn't exist or has been moved.</p>
+    <button class="btn-hero" onclick="window.location.href='/'">
+      Back to home →
+    </button>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TrackWise — Know Your Money</title>
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="logo">Track<span>Wise</span></div>
+  <div class="nav-center">
+    <a href="#how">How it works</a>
+    <a href="#features">Features</a>
+    <a href="/dashboard">Dashboard</a>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+
+  <!-- background ticker -->
+  <div class="hero-ticker">
+    <div class="ticker-line">TRACKWISE&nbsp;·&nbsp;TRACKWISE&nbsp;·&nbsp;TRACKWISE&nbsp;·&nbsp;TRACKWISE&nbsp;·&nbsp;TRACKWISE&nbsp;·&nbsp;TRACKWISE&nbsp;·&nbsp;</div>
+    <div class="ticker-line">KNOW YOUR MONEY&nbsp;·&nbsp;KNOW YOUR MONEY&nbsp;·&nbsp;KNOW YOUR MONEY&nbsp;·&nbsp;KNOW YOUR MONEY&nbsp;·&nbsp;</div>
+    <div class="ticker-line">AI FINANCE&nbsp;·&nbsp;AI FINANCE&nbsp;·&nbsp;AI FINANCE&nbsp;·&nbsp;AI FINANCE&nbsp;·&nbsp;AI FINANCE&nbsp;·&nbsp;</div>
+  </div>
+
+  <!-- orbs -->
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <div class="hero-topleft">
+    <div class="hero-tag">
+      <div class="hero-tag-line"></div>
+      <div class="hero-tag-inner">AI-Powered Finance Tracker</div>
+    </div>
+    <h1 class="hero-title">
+      <span class="line1">Your money,</span>
+      <span class="line2">finally clear.</span>
+      <span class="line3">Finally yours.</span>
+    </h1>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-bottom">
+        <button class="btn-hero" onclick="openUploadModal()">Upload your statement →</button>
+        <div class="hero-scroll">
+          <div class="scroll-line"></div>
+          Scroll to explore
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- ═══════════════ LIGHT BODY ═══════════════ -->
+<div class="light-body">
+
+  <!-- HOW IT WORKS -->
+  <div class="how-section" id="how">
+
+    <!-- HEADER -->
+    <div class="how-header reveal">
+      <div>
+        <div class="how-eyebrow">
+          <div class="how-eyebrow-line"></div>
+          <div class="how-eyebrow-text">How it works</div>
+        </div>
+        <h2 class="how-title">Three steps.<br><em>No confusion.</em></h2>
+      </div>
+      <div class="how-header-right">
+        <p>No spreadsheets, no manual entry. Drop in your PDF and TrackWise handles <strong>everything</strong> — parsing, categorizing, and visualizing your money.</p>
+      </div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="feat-row dark reveal">
+      <div class="feat-num">01</div>
+      <div class="feat-name">Upload<br>your PDF</div>
+      <div class="feat-desc">Drop in the bank statement your bank emails you every month. Any format, any layout, any number of pages our 3-layer parser figures it out automatically.</div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="feat-row lime reveal reveal-d1">
+      <div class="feat-num">02</div>
+      <div class="feat-name">AI reads<br>everything</div>
+      <div class="feat-desc">The AI categorizes every single transaction — Food, Transport, Rent, Subscriptions and more. Powered by few-shot prompting for accuracy. Done in under 10 seconds.</div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="feat-row dark reveal reveal-d2">
+      <div class="feat-num">03</div>
+      <div class="feat-name">Your dashboard,<br>ready to go</div>
+      <div class="feat-desc">Charts, breakdowns, and spending trends all built instantly. Override any AI category you disagree with, then export everything as a CSV.</div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features-section" id="features">
+
+    <!-- HEADER -->
+    <div class="feat-header reveal">
+      <div>
+        <div class="feat-eyebrow">
+          <div class="feat-eyebrow-line"></div>
+          <div class="feat-eyebrow-text">Features</div>
+        </div>
+        <h2 class="feat-title">Built different.<br><em>Works better.</em></h2>
+      </div>
+      <div class="feat-header-right">
+        <p>Three features that turn a <strong>raw PDF</strong> into a complete picture of your financial life.</p>
+      </div>
+    </div>
+
+    <!-- FEATURE 1: AI CATEGORIZATION — dark -->
+    <div class="feat-row dark reveal">
+      <div class="feat-num">01</div>
+      <div class="feat-name">AI<br>Categorization</div>
+      <div class="feat-desc">AI uses few-shot prompting to understand context and not just merchant names and 50 transactions per batch, done in under 10 seconds.</div>
+      <div class="feat-tags"></div>
+    </div>
+
+    <!-- FEATURE 2: PDF PARSING — lime -->
+    <div class="feat-row lime reveal reveal-d1">
+      <div class="feat-num">02</div>
+      <div class="feat-name">Smart PDF<br>Parsing</div>
+      <div class="feat-desc">3-layer fallback table extraction, regex parsing, then OCR. Page scoring finds transactions across any multi-page statement automatically.</div>
+      <div class="feat-tags"></div>
+    </div>
+
+    <!-- FEATURE 3: DASHBOARD — light -->
+    <div class="feat-row reveal reveal-d2">
+      <div class="feat-num">03</div>
+      <div class="feat-name">Dashboard<br>& Charts</div>
+      <div class="feat-desc">Spending breakdowns, daily charts, and category trends built instantly the moment your PDF is processed. Override any category, export as CSV.</div>
+      <div class="feat-tags"></div>
+    </div>
+
+  </div>
+
+  <!-- UPLOAD MODAL -->
+  <div class="upload-modal" id="uploadModal">
+    <div class="upload-modal-overlay" id="modalOverlay"></div>
+    <div class="upload-modal-content">
+      <button class="modal-close" id="modalClose">×</button>
+
+      <div class="upload-modal-header">
+        <h2 class="upload-modal-title">Upload Your Statement</h2>
+        <p class="upload-modal-subtitle">Drop in your PDF and let AI do the rest</p>
+      </div>
+
+      <div class="upload-box" id="uploadBox">
+        <input type="file" id="fileInput" accept=".pdf" style="display:none">
+        <div class="upload-icon">📄</div>
+        <div class="upload-text">
+          <strong>Click to upload</strong> or drag and drop
+        </div>
+        <div class="upload-hint">PDF files only · Max 16MB</div>
+      </div>
+
+      <div id="uploadProgress" class="upload-progress" style="display:none">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">Uploading...</div>
+      </div>
+
+      <div id="uploadResult" class="upload-result" style="display:none"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+  <div class="cta-bg-text">TRACKWISE</div>
+  <div class="cta-inner">
+    <h2 class="cta-title reveal">Stop guessing.<br>Start <em>knowing.</em></h2>
+    <p class="cta-sub reveal">Upload your bank statement and get a full spending dashboard in seconds.</p>
+    <div class="cta-buttons reveal">
+      <button class="btn-cta-primary" onclick="openUploadModal()">Upload your statement →</button>
+    </div>
+  </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/cursor.js') }}"></script>
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+</body>
+</html>

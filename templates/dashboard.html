@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — TrackWise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+</head>
+
+<body>
+
+  <!-- NAV (matches index.html) -->
+  <nav id="navbar" class="scrolled">
+    <div class="logo" onclick="window.location.href='/'">Track<span>Wise</span></div>
+    <div class="nav-center">
+      <a href="/#how">How it works</a>
+      <a href="/#features">Features</a>
+      <a href="/dashboard" style="color: var(--cream)">Dashboard</a>
+    </div>
+  </nav>
+
+  <!-- ORBS (same as home page hero) -->
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <!-- BODY -->
+  <div class="dash-body">
+
+    <!-- HEADER ROW -->
+    <div class="dash-header-row">
+      <div>
+        <div class="dash-title">Dashboard</div>
+        <div class="dash-subtitle" id="dashSubtitle">Loading your data...</div>
+      </div>
+      <button class="dash-export-btn hidden" id="btnExport">↓ Export CSV</button>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div class="dash-empty" id="emptyState">
+      <div class="dash-empty-icon">📊</div>
+      <h2 class="dash-empty-title">No data yet</h2>
+      <p class="dash-empty-desc">Upload a bank statement PDF to get started with your expense tracking</p>
+    </div>
+
+    <!-- AI CATEGORIZATION CARD -->
+    <div class="dash-ai-card hidden" id="aiCard">
+      <div class="dash-ai-left">
+        <div>
+          <div class="dash-ai-title">AI Categorization</div>
+          <div class="dash-ai-desc">Let Claude AI automatically categorize all your transactions</div>
+        </div>
+      </div>
+      <button class="dash-btn-categorize" id="btnCategorize">✨ Categorize →</button>
+      <div class="dash-ai-progress hidden" id="aiProgress">
+        <div class="dash-ai-progress-bar">
+          <div class="dash-ai-progress-fill" id="aiProgressFill"></div>
+        </div>
+        <div class="dash-ai-progress-text" id="aiProgressText">Categorizing with Claude AI...</div>
+      </div>
+    </div>
+
+    <!-- STATS + CHARTS ROW -->
+    <div class="dash-cards hidden" id="metricsGrid">
+
+      <!-- Total Transactions -->
+      <div class="dash-card">
+        <div class="dash-card-label">Total transactions</div>
+        <div class="dash-card-value" id="metricTotal">0</div>
+      </div>
+
+      <!-- Total Spent -->
+      <div class="dash-card">
+        <div class="dash-card-label">Total spent</div>
+        <div class="dash-card-value dash-card-value--spent" id="metricSpent">$0.00</div>
+      </div>
+
+      <!-- Spending Distribution -->
+      <div class="dash-card dash-card--chart hidden" id="chartsGrid">
+        <div class="dash-card-label">Spending distribution</div>
+        <div class="dash-donut-wrap">
+          <canvas id="pieChart"></canvas>
+          <div class="dash-legend" id="pieLegend"></div>
+        </div>
+      </div>
+
+      <!-- Top Merchants -->
+      <div class="dash-card dash-card--chart hidden" id="merchantsCard">
+        <div class="dash-card-label">Top merchants</div>
+        <div class="dash-merchant-list" id="merchantsList">
+          <div class="dash-merchant-row">
+            <div class="dash-merchant-icon">📊</div>
+            <div class="dash-merchant-info">
+              <div class="dash-merchant-name">No data yet</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Hidden elements for JS compatibility -->
+    <span id="metricIncomeLabel" class="hidden"></span>
+    <span id="metricIncome" class="hidden"></span>
+    <span id="metricNet" class="hidden"></span>
+    <span id="metricNetBadge" class="hidden"></span>
+
+    <!-- TRANSACTIONS TABLE -->
+    <div class="dash-transactions hidden" id="transactionsSection">
+      <div class="dash-transactions-header">
+        <h3 class="dash-section-label">All Transactions</h3>
+        <div class="dash-filter hidden" id="filterSection">
+          <select id="categoryFilter" class="dash-select">
+            <option value="all">All Categories</option>
+          </select>
+        </div>
+      </div>
+      <div class="dash-table-wrap">
+        <table class="dash-table" id="transactionsTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Amount</th>
+              <th class="hidden" id="categoryHeader">Category</th>
+            </tr>
+          </thead>
+          <tbody id="transactionsBody"></tbody>
+        </table>
+      </div>
+      <div class="dash-table-footer">
+        <span id="tableCount">Showing 0 transactions</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+
+</html>

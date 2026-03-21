@@ -1,0 +1,450 @@
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* DASHBOARD — extends style.css design system                             */
+/* Uses same --ink / --lime / --cream / Cabinet Grotesk tokens             */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+/* Nav offset — fixed nav is ~64px tall */
+.dash-body {
+  padding: 100px 3.5rem 4rem;
+  background: var(--ink);
+  min-height: 100vh;
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* HEADER ROW                                                              */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.dash-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.dash-title {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+
+.dash-subtitle {
+  font-size: 0.78rem;
+  color: rgba(250, 247, 240, 0.35);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.dash-export-btn {
+  background: transparent;
+  color: rgba(250, 247, 240, 0.45);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.dash-export-btn:hover {
+  color: var(--cream);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* EMPTY STATE                                                             */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.dash-empty {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.dash-empty-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.dash-empty-title {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  color: var(--cream);
+}
+
+.dash-empty-desc {
+  font-size: 0.9rem;
+  color: rgba(250, 247, 240, 0.4);
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* AI CATEGORIZATION CARD                                                  */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.dash-ai-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 22px 28px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dash-ai-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.dash-ai-icon { font-size: 22px; }
+
+.dash-ai-title {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 2px;
+}
+
+.dash-ai-desc {
+  font-size: 0.78rem;
+  color: rgba(250, 247, 240, 0.38);
+  line-height: 1.5;
+}
+
+.dash-btn-categorize {
+  background: var(--lime);
+  color: var(--ink);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+
+.dash-btn-categorize:hover {
+  background: var(--lime2);
+  transform: scale(1.03);
+}
+
+.dash-ai-progress {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.dash-ai-progress-bar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.dash-ai-progress-fill {
+  height: 100%;
+  background: var(--lime);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.dash-ai-progress-text {
+  font-size: 0.72rem;
+  color: rgba(250, 247, 240, 0.4);
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* STAT + CHART CARDS GRID                                                 */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.dash-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: start;
+}
+
+.dash-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 28px 24px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.dash-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.dash-card--chart {
+  padding: 24px;
+}
+
+.dash-card-label {
+  font-size: 0.68rem;
+  color: rgba(250, 247, 240, 0.3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.dash-card-value {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--cream);
+}
+
+.dash-card-value--spent {
+  color: #FF6B6B;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* DONUT CHART                                                             */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.dash-donut-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.dash-donut-wrap canvas {
+  max-width: 180px;
+  max-height: 180px;
+}
+
+.dash-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  justify-content: center;
+}
+
+.dash-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  color: rgba(250, 247, 240, 0.45);
+  letter-spacing: 0.03em;
+}
+
+.dash-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* TOP MERCHANTS                                                           */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.dash-merchant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dash-merchant-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dash-merchant-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.dash-merchant-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  background: rgba(212, 242, 68, 0.1);
+}
+
+.dash-merchant-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.dash-merchant-name {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: rgba(250, 247, 240, 0.85);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dash-merchant-sub {
+  font-size: 0.7rem;
+  color: rgba(250, 247, 240, 0.3);
+  margin-top: 2px;
+}
+
+.dash-merchant-amt {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--cream);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* TRANSACTIONS TABLE                                                      */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.dash-transactions {
+  margin-top: 20px;
+}
+
+.dash-transactions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.dash-section-label {
+  font-size: 0.68rem;
+  color: rgba(250, 247, 240, 0.3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.dash-select {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(250, 247, 240, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.dash-table-wrap {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.dash-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dash-table thead {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.dash-table th {
+  font-size: 0.68rem;
+  color: rgba(250, 247, 240, 0.35);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 18px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.dash-table td {
+  padding: 14px 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 0.85rem;
+  color: rgba(250, 247, 240, 0.65);
+}
+
+.dash-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.dash-table-footer {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.72rem;
+  color: rgba(250, 247, 240, 0.25);
+  letter-spacing: 0.05em;
+}
+
+.amount-positive { color: var(--lime); }
+.amount-negative { color: #FF6B6B; }
+
+.category-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: 'Cabinet Grotesk', sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* UTILITY                                                                 */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.hidden { display: none !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* RESPONSIVE                                                              */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .dash-body {
+    padding: 90px 1.5rem 3rem;
+  }
+  .dash-cards {
+    grid-template-columns: 1fr;
+  }
+  .dash-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}
