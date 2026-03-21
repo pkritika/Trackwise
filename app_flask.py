@@ -17,7 +17,7 @@ from categorizer import categorize_transactions, get_category_summary
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 app.config['UPLOAD_FOLDER'] = tempfile.gettempdir()
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB per file
 
 ALLOWED_EXTENSIONS = {'pdf'}
 
@@ -90,7 +90,7 @@ def dashboard():
 
 @app.route('/api/upload', methods=['POST'])
 def upload_pdf():
-    """Upload and parse PDF bank statement"""
+    """Upload and parse a single PDF bank statement, appending to session data"""
 
     if 'file' not in request.files:
         return jsonify({'error': 'No file provided'}), 400
@@ -105,28 +105,25 @@ def upload_pdf():
 
     filepath = None
     try:
-        # Save uploaded file temporarily
         filename = secure_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
 
-        # Extract transactions
         df = extract_transactions(filepath)
-
-        # Clean up temp file
         os.unlink(filepath)
         filepath = None
 
-        # Convert DataFrame to list of dicts
-        transactions = df.to_dict('records')
+        new_transactions = df.to_dict('records')
 
-        # Persist on the server side (not the cookie)
-        _save_data(transactions, categorized=False)
+        # Append to any existing session transactions
+        existing = _load_data()
+        merged = existing.get('transactions', []) + new_transactions
+        _save_data(merged, categorized=False)
 
         return jsonify({
             'success': True,
-            'count': len(transactions),
-            'transactions': transactions
+            'count': len(new_transactions),
+            'total': len(merged)
         })
 
     except ValueError as e:

@@ -215,5 +215,22 @@ nav.scrolled{background:rgba(13,13,11,.92);backdrop-filter:blur(16px);border-bot
 .result-button{background:var(--lime);color:var(--ink);border:none;padding:.75rem 1.8rem;border-radius:999px;font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s}
 .result-button:hover{background:var(--lime2);transform:scale(1.04)}
 
+/* per-file statement cards */
+.stmt-card-list{background:transparent;border:none;padding:0;text-align:left}
+.stmt-cards{display:flex;flex-direction:column;gap:.6rem}
+.stmt-card{display:flex;align-items:center;gap:.8rem;padding:.75rem 1rem;background:rgba(13,13,11,.04);border:1px solid var(--border);border-radius:12px;transition:background .2s}
+.stmt-card-icon{font-size:1.4rem;flex-shrink:0}
+.stmt-card-info{flex:1;min-width:0}
+.stmt-card-name{font-size:.85rem;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:'Cabinet Grotesk',sans-serif}
+.stmt-card-size{font-size:.72rem;color:var(--muted-light);margin-top:.1rem}
+.stmt-card-badge{padding:.25rem .75rem;border-radius:999px;font-size:.68rem;font-weight:700;font-family:'Cabinet Grotesk',sans-serif;white-space:nowrap;flex-shrink:0;transition:all .3s}
+.stmt-card-badge.queued{background:rgba(13,13,11,.07);color:var(--muted-light)}
+.stmt-card-badge.uploading{background:rgba(29,78,216,.1);color:var(--blue,#1d4ed8);animation:pulse .9s ease-in-out infinite}
+.stmt-card-badge.success{background:rgba(212,242,68,.18);color:#4a6b00}
+.stmt-card-badge.error{background:rgba(232,69,60,.1);color:var(--red)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes modalSlideUp{from{opacity:0;transform:translateY(40px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+
